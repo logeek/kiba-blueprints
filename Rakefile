@@ -5,6 +5,7 @@ task :bulk_upsert do
   if ENV['USE_DB_LOGGER'] == '1'
     options[:logger] = Logger.new(STDOUT)
   end
+  count = 100_000
   Sequel.connect(ENV.fetch('DATABASE_URL'), options) do |db|
     db.create_table! :products do
       primary_key :id
@@ -21,7 +22,7 @@ task :bulk_upsert do
       {base_price: 200, description_prefix: "Second run description"}
     ].each do |options|
       Kiba.run(Kiba::Blueprints::BulkUpsert.setup(
-        options.merge(database: db, count: 100_000)
+        options.merge(database: db, count: count)
       ))
     end
   end
