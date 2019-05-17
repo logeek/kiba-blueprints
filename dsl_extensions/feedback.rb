@@ -1,3 +1,5 @@
+require 'kiba-common/dsl_extensions/logger'
+
 module Kiba
   module Blueprints
     module DSLExtensions
