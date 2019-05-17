@@ -18,19 +18,6 @@ module Kiba
 
           source Kiba::Common::Sources::Enumerable, (1..count)
           
-          # NOTE: we use this cheap technique to ensure non regression of the blueprint.
-          # This code is not necessarily a recommendation of how to implement that.
-          post_process do
-            # just a couple of sanity checks here 
-            fail "Invalid number of records" unless database[:products].count == count
-            test_record = database[:products].where(product_ref: "ref-1").first!
-            fail "Invalid test record (#{test_record})" unless test_record.slice(:description, :price_cents) == {
-              description: description_prefix + " (1)",
-              price_cents: base_price + 1
-            }
-            logger.info "Sanity checks OK!"
-          end
-
           transform { |r|
             {
               product_ref: "ref-#{r}",
@@ -54,6 +41,19 @@ module Kiba
                 }
               )
             }
+
+          # NOTE: we use this cheap technique to ensure non regression of the blueprint.
+          # This code is not necessarily a recommendation of how to implement that.
+          post_process do
+            # just a couple of sanity checks here 
+            fail "Invalid number of records" unless database[:products].count == count
+            test_record = database[:products].where(product_ref: "ref-1").first!
+            fail "Invalid test record (#{test_record})" unless test_record.slice(:description, :price_cents) == {
+              description: description_prefix + " (1)",
+              price_cents: base_price + 1
+            }
+            logger.info "Sanity checks OK!"
+          end
         end
       end
     end
