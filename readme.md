@@ -1,5 +1,7 @@
 This repository contains a single blueprint (but I'll add more) showcasing the use of [Kiba ETL](https://www.kiba-etl.org) and [Kiba Pro](https://github.com/thbar/kiba/wiki#kiba-pro).
 
+Note that Kiba Pro is a commercial extension ; running `bundle install` requires an active subscription. Configuration instructions can be found [here](https://github.com/thbar/kiba/wiki/How-to-install-Kiba-Pro).
+
 License for this repository: MIT.
 
 ### Postgres bulk upsert (ON CONFLICT UPDATE)
