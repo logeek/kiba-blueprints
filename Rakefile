@@ -2,6 +2,7 @@ desc "Bulk upserts demonstration (tested with PG)"
 task :bulk_upsert do
   require_relative 'bulk_upsert'
   options = {}
+  # Use this to investigate the logs
   if ENV['USE_DB_LOGGER'] == '1'
     options[:logger] = Logger.new(STDOUT)
   end
