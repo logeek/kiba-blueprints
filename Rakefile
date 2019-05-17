@@ -21,7 +21,7 @@ task :bulk_upsert do
       {base_price: 200, description_prefix: "Second run description"}
     ].each do |options|
       Kiba.run(Kiba::Blueprints::BulkUpsert.setup(
-        options.merge(database: db, count: 10_000)
+        options.merge(database: db, count: 100_000)
       ))
     end
   end
