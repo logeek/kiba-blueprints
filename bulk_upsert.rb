@@ -9,14 +9,14 @@ module Kiba
     module BulkUpsert
       module_function
 
-      def setup(database:, base_price:, description_prefix:)
+      def setup(database:, base_price:, description_prefix:, count: 100_000)
         klass = self
 
         Kiba.parse do
           extend Kiba::Blueprints::DSLExtensions::Feedback
           setup_feedback(klass)
 
-          source Kiba::Common::Sources::Enumerable, (1..100_000)
+          source Kiba::Common::Sources::Enumerable, (1..count)
 
           transform { |r|
             {
