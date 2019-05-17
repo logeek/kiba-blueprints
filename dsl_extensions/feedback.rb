@@ -5,7 +5,7 @@ module Kiba
     module DSLExtensions
       module Feedback
         # NOTE: just a little helper to easily inject some stats in a given job
-        def setup_feedback(klass)
+        def setup_feedback(klass, feedback_freq: 25_000)
           extend Kiba::Common::DSLExtensions::Logger
 
           pre_process do
@@ -15,6 +15,9 @@ module Kiba
           end
           transform do |r|
             @processed_rows_count += 1
+            if @processed_rows_count % feedback_freq == 0
+              logger.info "Processing #{feedback_freq} rows..."
+            end
             r
           end
           post_process do
