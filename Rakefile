@@ -1,3 +1,4 @@
+desc "Bulk upserts demonstration (tested with PG)"
 task :bulk_upsert do
   require_relative 'bulk_upsert'
   options = {}
