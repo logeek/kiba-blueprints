@@ -6,6 +6,8 @@ module Kiba
       module Feedback
         # NOTE: just a little helper to easily inject some stats in a given job
         def setup_feedback(klass)
+          extend Kiba::Common::DSLExtensions::Logger
+
           pre_process do
             @processed_rows_count = 0
             @start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
